@@ -1,19 +1,32 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+  <title>BULK COORDINATE CONVERTER</title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="assets/reset.css" />
+  <link rel="stylesheet" type="text/css" href="assets/style.css" />
+  <link rel="shortcut icon" type="image/png" href="favicon.png"/>
 </head>
 <body>
 <pre>
 ┏┓ ╻ ╻╻  ╻┏    ┏━╸┏━┓┏━┓┏━┓╺┳┓╻┏┓╻┏━┓╺┳╸┏━╸   ┏━╸┏━┓┏┓╻╻ ╻┏━╸┏━┓╺┳╸┏━╸┏━┓
 ┣┻┓┃ ┃┃  ┣┻┓   ┃  ┃ ┃┃ ┃┣┳┛ ┃┃┃┃┗┫┣━┫ ┃ ┣╸    ┃  ┃ ┃┃┗┫┃┏┛┣╸ ┣┳┛ ┃ ┣╸ ┣┳┛
 ┗━┛┗━┛┗━╸╹ ╹   ┗━╸┗━┛┗━┛╹┗╸╺┻┛╹╹ ╹╹ ╹ ╹ ┗━╸   ┗━╸┗━┛╹ ╹┗┛ ┗━╸╹┗╸ ╹ ┗━╸╹┗╸
-
-┏━╸┏━┓┏━┓┏━┓╺┳┓╻┏┓╻┏━┓╺┳╸┏━╸┏━┓
-┃  ┃ ┃┃ ┃┣┳┛ ┃┃┃┃┗┫┣━┫ ┃ ┣╸ ┗━┓
-┗━╸┗━┛┗━┛╹┗╸╺┻┛╹╹ ╹╹ ╹ ╹ ┗━╸┗━┛
-╺━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸
-<textarea></textarea>
-
-
 </pre>
+
+<div class="row">
+  <div class="column">
+    <p>COORDINATES IN</p>
+    <textarea id="garbageIn"></textarea>
+  </div>
+  <div class="column">
+    <button id="convert">CONVERT</button>
+  </div>
+  <div class="column">
+    <p>COORDINATES OUT</p>
+    <textarea id="garbageOut"></textarea>
+  </div>
+</div>
+<script type="text/javascript" src="assets/script.js"></script>
 </body>
 </html>

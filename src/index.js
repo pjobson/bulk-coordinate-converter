@@ -48,10 +48,13 @@ const bcc = {
       const out = {
         type:  type,
         input: coord,
-        MGRS:  (type === 'INVALID') ? '' : cc.MGRS.gridReference,
-        DD:    (type === 'INVALID') ? '' : `${cc.DD.lat}, ${cc.DD.lng}`,
-        DDM:   (type === 'INVALID') ? '' : `${cc.DDM.lat.display}, ${cc.DDM.lng.display}`,
-        DMS:   (type === 'INVALID') ? '' : `${cc.DMS.lat.display}, ${cc.DMS.lng.display}`
+        MGRS:    (type === 'INVALID') ? null : cc.MGRS.gridReference,
+        DD_LAT:  (type === 'INVALID') ? null : cc.DD.lat,
+        DD_LNG:  (type === 'INVALID') ? null : cc.DD.lng,
+        DDM_LAT: (type === 'INVALID') ? null : cc.DDM.lat.display,
+        DDM_LNG: (type === 'INVALID') ? null : cc.DDM.lng.display,
+        DMS_LAT: (type === 'INVALID') ? null : cc.DMS.lat.display,
+        DMS_LNG: (type === 'INVALID') ? null : cc.DMS.lng.display
       };
 
       // fill up the output array
@@ -79,6 +82,7 @@ const bcc = {
     bcc.coordOut.forEach((coord, index) => {
       // Build elements the old fashioned way
       const tr = document.createElement('tr');
+            tr.setAttribute('class', coord.type);
       const idxTD = document.createElement('td');
             idxTD.appendChild(document.createTextNode(index+1));
       const typeTD = document.createElement('td');
@@ -87,20 +91,29 @@ const bcc = {
             inputTD.appendChild(document.createTextNode(coord.input));
       const mgrsTD = document.createElement('td');
             mgrsTD.appendChild(document.createTextNode(coord.MGRS));
-      const ddTD = document.createElement('td');
-            ddTD.appendChild(document.createTextNode(coord.DD));
-      const ddmTD = document.createElement('td');
-            ddmTD.appendChild(document.createTextNode(coord.DDM));
-      const dmsTD = document.createElement('td');
-            dmsTD.appendChild(document.createTextNode(coord.DMS));
+      const ddlatTD = document.createElement('td');
+            ddlatTD.appendChild(document.createTextNode(coord.DD_LAT));
+      const ddlngTD = document.createElement('td');
+            ddlngTD.appendChild(document.createTextNode(coord.DD_LNG));
+      const ddmlatTD = document.createElement('td');
+            ddmlatTD.appendChild(document.createTextNode(coord.DDM_LAT));
+      const ddmlngTD = document.createElement('td');
+            ddmlngTD.appendChild(document.createTextNode(coord.DDM_LNG));
+      const dmslatTD = document.createElement('td');
+            dmslatTD.appendChild(document.createTextNode(coord.DMS_LAT));
+      const dmslngTD = document.createElement('td');
+            dmslngTD.appendChild(document.createTextNode(coord.DMS_LNG));
       // append the new elements
       tr.appendChild(idxTD);
       tr.appendChild(typeTD);
       tr.appendChild(inputTD);
       tr.appendChild(mgrsTD);
-      tr.appendChild(ddTD);
-      tr.appendChild(ddmTD);
-      tr.appendChild(dmsTD);
+      tr.appendChild(ddlatTD);
+      tr.appendChild(ddlngTD);
+      tr.appendChild(ddmlatTD);
+      tr.appendChild(ddmlngTD);
+      tr.appendChild(dmslatTD);
+      tr.appendChild(dmslngTD);
 
       tb.appendChild(tr);
     });

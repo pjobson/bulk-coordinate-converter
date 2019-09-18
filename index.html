@@ -1,0 +1,90 @@
+<html>
+<head>
+  <title>Bulk Coordinate Conversion</title>
+  <meta charset="UTF-8">
+  <script type="text/javascript" src="./src/mgrs/mgrs.js"></script>
+  <script type="text/javascript" src="./src/utm/utm.js"></script>
+  <script type="module" src="./src/index.js"></script>
+  <link rel="stylesheet" type="text/css" href="./styles/cssreset-min.css" />
+  <link rel="stylesheet" type="text/css" href="./styles/style.css" />
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Hepta+Slab|Kelly+Slab|Source+Code+Pro&display=swap" />
+<body>
+  <div id="container">
+    <h1>Bulk Coordinate Conversion</h1>
+    <p>
+      Enter <b>Decimal Degrees</b>, <b>Decimal Minutes Seconds</b>, <b>Decimal Degree Minutes</b>,
+        <b>Universal Transverse Mercator</b>, or <b>Military Grid Reference</b> coordinate sets; one per line.
+        This will automatically convert these coordinates to each of the other ones.
+    </p>
+    <h2>Examples</h2>
+    <ul>
+      <li>MGRS
+        <ul>
+          <li>1RDM6565119407</li>
+          <li>1RDM6565119407</li>
+          <li>1UET2505246858</li>
+        </ul>
+      </li>
+      <li>Decimal Degrees
+        <ul>
+          <li>53.87583, -166.53639</li>
+          <li>64.56361, -165.37139</li>
+          <li>58.61167, -159.99083</li>
+        </ul>
+      </li>
+      <li>Degrees Decimal Minutes
+        <ul>
+          <li>21° 54.00972′ N, 159° 28.0025′ W</li>
+          <li>22° 2.01139′ N,  159° 20.00389′ W</li>
+          <li>21° 38.00833′ N, 158° 3.00889′ W</li>
+        </ul>
+      </li>
+      <li>Degrees Minutes Seconds
+        <ul>
+          <li>21° 21′ 0″ N,  157° 57′ 0″ W</li>
+          <li>21° 22′ 20″ N, 157° 56′ 30″ W</li>
+          <li>21° 21′ 58″ N, 157° 56′ 18″ W</li>
+        </ul>
+      </li>
+      <li>Universal Transverse Mercator
+        <ul>
+          <li>18S 323394 4307396</li>
+          <li>37U 413245 6179306</li>
+        </ul>
+      </li>
+    </ul>
+    <textarea id="input"></textarea>
+    <center><button id="dooeet">CONVERT</button></center>
+    <div id="results">
+      <h2>Results</h2>
+      <table id="ctable">
+        <thead>
+          <tr>
+            <th colspan="5">&nbsp;</th>
+            <th colspan="2" class="thcntr">Decimal Degrees</th>
+            <th colspan="2" class="thcntr">Degrees Decimal Minutes</th>
+            <th colspan="2" class="thcntr">Degrees Minutes Seconds</th>
+          </tr>
+          <tr>
+            <th>#</th>
+            <th>Type</th>
+            <th>User Input</th>
+            <th>MGRS</th>
+            <th>UTM</th>
+            <th>Latitude</th>
+            <th>Longitude</th>
+            <th>Latitude</th>
+            <th>Longitude</th>
+            <th>Latitude</th>
+            <th>Longitude</th>
+          </tr>
+        </thead>
+        <tbody id="tb"></tbody>
+      </table>
+      <h2>JSON</h2>
+      <textarea id="json"></textarea>
+    </div>
+  </div>
+</body>
+</html>
+

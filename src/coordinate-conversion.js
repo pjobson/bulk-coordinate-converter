@@ -1,18 +1,18 @@
 `use strict`;
 
 import { MilitaryGridReferenceSystem } from './military-grid-reference-system.js';
-import { DecimalDegrees } from './decimal-degrees.js';
-import { DegreesMinutesSeconds } from './degrees-minutes-seconds.js';
-import { DegreesDecimalMinutes } from './degrees-decimal-minutes.js';
-import { Distance } from './distance.js';
+import { DecimalDegrees }              from './decimal-degrees.js';
+import { DegreesMinutesSeconds }       from './degrees-minutes-seconds.js';
+import { DegreesDecimalMinutes }       from './degrees-decimal-minutes.js';
+import { UniversalTransverseMercator } from './universal-transverse-mercator.js';
+import { Distance }                    from './distance.js';
 
 export class CoordinateConversion {
-  MGRS; // MilitaryGridReferenceSystem;
-  DDM;  // DegreesDecimalMinutes;
-  DMS;  // DegreesMinutesSeconds;
-  DD;   // DecimalDegrees;
-
   constructor() {
+    this.MGRS; // MilitaryGridReferenceSystem;
+    this.DDM;  // DegreesDecimalMinutes;
+    this.DMS;  // DegreesMinutesSeconds;
+    this.DD;   // DecimalDegrees;
     return this;
   }
 
@@ -26,32 +26,44 @@ export class CoordinateConversion {
    */
   convertCoords( convertFrom, coords ) {
     switch ( convertFrom ) {
+      case 'UTM': {
+        this.UTM = new UniversalTransverseMercator( coords );
+        this.DD  = new DecimalDegrees( this.UTM.toDD() );
+        this.MGRS  = new MilitaryGridReferenceSystem( this.UTM.toMGRS() );
+        this.DDM  = new DegreesDecimalMinutes( this.UTM.toDDM() );
+        this.DMS  = new DegreesMinutesSeconds( this.UTM.toDMS() );
+        break;
+      }
       case 'MGRS': {
         this.MGRS = new MilitaryGridReferenceSystem( coords );
-        this.DD = new DecimalDegrees( this.MGRS.toDD() );
-        this.DMS = new DegreesMinutesSeconds( this.MGRS.toDMS() );
-        this.DDM = new DegreesDecimalMinutes( this.MGRS.toDDM() );
+        this.DD   = new DecimalDegrees( this.MGRS.toDD() );
+        this.DMS  = new DegreesMinutesSeconds( this.MGRS.toDMS() );
+        this.DDM  = new DegreesDecimalMinutes( this.MGRS.toDDM() );
+        this.UTM  = new UniversalTransverseMercator( this.MGRS.toUTM() );
         break;
       }
       case 'DDM': {
-        this.DDM = new DegreesDecimalMinutes( coords );
-        this.DD = new DecimalDegrees( this.DDM.toDD() );
-        this.DMS = new DegreesMinutesSeconds( this.DDM.toDMS() );
+        this.DDM  = new DegreesDecimalMinutes( coords );
+        this.DD   = new DecimalDegrees( this.DDM.toDD() );
+        this.DMS  = new DegreesMinutesSeconds( this.DDM.toDMS() );
         this.MGRS = new MilitaryGridReferenceSystem( this.DDM.toMGRS() );
+        this.UTM  = new UniversalTransverseMercator( this.DDM.toUTM() );
         break;
       }
       case 'DMS': {
-        this.DMS = new DegreesMinutesSeconds( coords );
-        this.DD = new DecimalDegrees( this.DMS.toDD() );
-        this.DDM = new DegreesDecimalMinutes( this.DMS.toDDM() );
+        this.DMS  = new DegreesMinutesSeconds( coords );
+        this.DD   = new DecimalDegrees( this.DMS.toDD() );
+        this.DDM  = new DegreesDecimalMinutes( this.DMS.toDDM() );
         this.MGRS = new MilitaryGridReferenceSystem( this.DMS.toMGRS() );
+        this.UTM  = new UniversalTransverseMercator( this.DMS.toUTM() );
         break;
       }
       case 'DD': {
-        this.DD = new DecimalDegrees( coords );
-        this.DMS = new DegreesMinutesSeconds( this.DD.toDMS() );
-        this.DDM = new DegreesDecimalMinutes( this.DD.toDDM() );
+        this.DD   = new DecimalDegrees( coords );
+        this.DMS  = new DegreesMinutesSeconds( this.DD.toDMS() );
+        this.DDM  = new DegreesDecimalMinutes( this.DD.toDDM() );
         this.MGRS = new MilitaryGridReferenceSystem( this.DD.toMGRS() );
+        this.UTM  = new UniversalTransverseMercator( this.DD.toUTM() );
         break;
       }
     }
@@ -66,6 +78,16 @@ export class CoordinateConversion {
    */
   distanceTo( toCoords ) {
     return Distance( this, toCoords );
+  }
+
+  /**
+   * setUTM method
+   *
+   * @param utmInput - string containg utm coordinate
+   *
+   */
+  setUTM( utmInput ) {
+    this.convertCoords( 'UTM', utmInput );
   }
 
   /**

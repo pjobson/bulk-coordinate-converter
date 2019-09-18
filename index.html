@@ -3,6 +3,7 @@
   <title>Bulk Coordinate Conversion</title>
   <meta charset="UTF-8">
   <script type="text/javascript" src="./src/mgrs/mgrs.js"></script>
+  <script type="text/javascript" src="./src/utm/utm.js"></script>
   <script type="module" src="./src/index.js"></script>
   <link rel="stylesheet" type="text/css" href="./styles/cssreset-min.css" />
   <link rel="stylesheet" type="text/css" href="./styles/style.css" />
@@ -11,8 +12,9 @@
   <div id="container">
     <h1>Bulk Coordinate Conversion</h1>
     <p>
-      Enter Decimal Degrees, Decimal Minutes Seconds, Decimal Degree Minutes, or Military Grid Reference coordinate sets; one per line.
-      This will automatically convert these coordinates to each of the other ones.
+      Enter <b>Decimal Degrees</b>, <b>Decimal Minutes Seconds</b>, <b>Decimal Degree Minutes</b>,
+        <b>Universal Transverse Mercator</b>, or <b>Military Grid Reference</b> coordinate sets; one per line.
+        This will automatically convert these coordinates to each of the other ones.
     </p>
     <h2>Examples</h2>
     <ul>
@@ -44,33 +46,44 @@
           <li>21° 21′ 58″ N, 157° 56′ 18″ W</li>
         </ul>
       </li>
+      <li>Universal Transverse Mercator
+        <ul>
+          <li>18S 323394 4307396</li>
+          <li>37U 413245 6179306</li>
+        </ul>
+      </li>
     </ul>
     <textarea id="input"></textarea>
     <center><button id="dooeet">CONVERT</button></center>
-    <table id="ctable">
-      <thead>
-        <tr>
-          <th colspan="4">&nbsp;</th>
-          <th colspan="2" class="thcntr">Decimal Degrees</th>
-          <th colspan="2" class="thcntr">Degrees Decimal Minutes</th>
-          <th colspan="2" class="thcntr">Degrees Minutes Seconds</th>
-        </tr>
-        <tr>
-          <th>#</th>
-          <th>Type</th>
-          <th>User Input</th>
-          <th>MGRS</th>
-          <th>Latitude</th>
-          <th>Longitude</th>
-          <th>Latitude</th>
-          <th>Longitude</th>
-          <th>Latitude</th>
-          <th>Longitude</th>
-        </tr>
-      </thead>
-      <tbody id="tb"></tbody>
-    </table>
-    <textarea id="json"></textarea>
+    <div id="results">
+      <h2>Results</h2>
+      <table id="ctable">
+        <thead>
+          <tr>
+            <th colspan="5">&nbsp;</th>
+            <th colspan="2" class="thcntr">Decimal Degrees</th>
+            <th colspan="2" class="thcntr">Degrees Decimal Minutes</th>
+            <th colspan="2" class="thcntr">Degrees Minutes Seconds</th>
+          </tr>
+          <tr>
+            <th>#</th>
+            <th>Type</th>
+            <th>User Input</th>
+            <th>MGRS</th>
+            <th>UTM</th>
+            <th>Latitude</th>
+            <th>Longitude</th>
+            <th>Latitude</th>
+            <th>Longitude</th>
+            <th>Latitude</th>
+            <th>Longitude</th>
+          </tr>
+        </thead>
+        <tbody id="tb"></tbody>
+      </table>
+      <h2>JSON</h2>
+      <textarea id="json"></textarea>
+    </div>
   </div>
 </body>
 </html>

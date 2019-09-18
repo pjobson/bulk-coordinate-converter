@@ -29,6 +29,9 @@ const bcc = {
       // Setup a new conversion for this input
       const cc = new CoordinateConversion();
       switch (type) {
+        case 'UTM':
+          cc.setUTM(coord);
+          break;
         case 'MGRS':
           cc.setMGRS(coord);
           break;
@@ -49,6 +52,7 @@ const bcc = {
         type:  type,
         input: coord,
         MGRS:    (type === 'INVALID') ? null : cc.MGRS.gridReference,
+        UTM:     (type === 'INVALID') ? null : cc.UTM.display,
         DD_LAT:  (type === 'INVALID') ? null : cc.DD.lat,
         DD_LNG:  (type === 'INVALID') ? null : cc.DD.lng,
         DDM_LAT: (type === 'INVALID') ? null : cc.DDM.lat.display,
@@ -64,11 +68,14 @@ const bcc = {
     // convert to a table & json
     bcc.tablify();
     bcc.jsonify();
+    bcc.showMe();
+  },
+  showMe: () => {
+    document.getElementById('results').style.display = 'block';
   },
   jsonify: () => {
     const json = JSON.stringify(bcc.coordOut);
     document.getElementById('json').value = json;
-    document.getElementById('json').style.display = 'inline';
   },
   tablify: () => {
     const tb = document.getElementById('tb');
@@ -91,6 +98,8 @@ const bcc = {
             inputTD.appendChild(document.createTextNode(coord.input));
       const mgrsTD = document.createElement('td');
             mgrsTD.appendChild(document.createTextNode(coord.MGRS));
+      const utmTD = document.createElement('td');
+            utmTD.appendChild(document.createTextNode(coord.UTM));
       const ddlatTD = document.createElement('td');
             ddlatTD.appendChild(document.createTextNode(coord.DD_LAT));
       const ddlngTD = document.createElement('td');
@@ -108,17 +117,15 @@ const bcc = {
       tr.appendChild(typeTD);
       tr.appendChild(inputTD);
       tr.appendChild(mgrsTD);
+      tr.appendChild(utmTD);
       tr.appendChild(ddlatTD);
       tr.appendChild(ddlngTD);
       tr.appendChild(ddmlatTD);
       tr.appendChild(ddmlngTD);
       tr.appendChild(dmslatTD);
       tr.appendChild(dmslngTD);
-
       tb.appendChild(tr);
     });
-
-    document.getElementById('ctable').style.display = 'block';
   }
 };
 

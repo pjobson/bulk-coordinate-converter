@@ -1,9 +1,6 @@
 import { PATTERNS } from './patterns.js';
 
 export class DegreesDecimalMinutes {
-  lat;
-  lng;
-
   /**
    * Constructs DegreesDecimalMinutes Object
    *
@@ -16,6 +13,9 @@ export class DegreesDecimalMinutes {
    *
    */
   constructor(coords) {
+    this.lat;
+    this.lng;
+
     const errors = this.validate(coords);
     if (errors.length > 0) {
       throw new Error(errors);
@@ -66,6 +66,25 @@ export class DegreesDecimalMinutes {
       nCoords[key].display = `${nCoords[key].degrees}° ${nCoords[key].minutes}′ ${nCoords[key].direction}`;
     }
     return nCoords;
+  };
+
+  /**
+   * Converts Degrees Decimal Minutes to Universal Transverse Mercator
+   *
+   * @returns object containing UTM data
+   *
+   */
+  toUTM() {
+    const { lat, lng } = this.toDD();
+    const utmdata = utm.fromLatLon(lat, lng);
+
+    return {
+      display    : utmdata.display,
+      easting    : utmdata.easting,
+      northing   : utmdata.northing,
+      zoneLetter : utmdata.zoneLetter,
+      zoneNum    : utmdata.zoneNum
+    }
   };
 
   /**

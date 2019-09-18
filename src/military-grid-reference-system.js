@@ -1,14 +1,12 @@
-import { PATTERNS } from './patterns.js';
+  import { PATTERNS } from './patterns.js';
 
 /*
  *
- * Military GridReference System Class
+ * Military Grid Reference System Class
  * Defines MGRS object and functions related.
  *
  */
 export class MilitaryGridReferenceSystem {
-  gridReference;
-
   /**
    * Constructs MilitaryGridReferenceSystem Object
    *
@@ -17,10 +15,11 @@ export class MilitaryGridReferenceSystem {
    * @remarks
    * This can take in machine or user input and will normalize it to a DDM object.
    *
-   * @returns MilitaryGridReferenceSystem object containing latitude and logitude
+   * @returns MilitaryGridReferenceSystem object containing reference
    *
    */
   constructor(reference) {
+    this.gridReference;
     const errors = this.validate(reference);
     if (errors.length > 0) {
       throw new Error(errors);
@@ -59,7 +58,26 @@ export class MilitaryGridReferenceSystem {
     return mgrs;
   }
 
-    /**
+  /**
+   * Converts to Universal Transverse Mercator
+   *
+   * @returns object containing UTM data
+   *
+   */
+  toUTM() {
+    const [lng, lat] = mgrs.toPoint(this.gridReference);
+    const utmdata = utm.fromLatLon(lat, lng);
+
+    return {
+      display    : utmdata.display,
+      easting    : utmdata.easting,
+      northing   : utmdata.northing,
+      zoneLetter : utmdata.zoneLetter,
+      zoneNum    : utmdata.zoneNum
+    }
+  };
+
+  /**
    * Converts to Decimal Degrees
    *
    * @returns object containing DD data

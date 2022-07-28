@@ -72,9 +72,11 @@ const utm = {
     }
 
     const x = easting - 500000;
-    const y = northing;
+    let y = northing;
 
-    if (!northern) y -= 1e7;
+    if (!northern) {
+      y -= 1e7;
+    }
 
     const m = y / utm.K0;
     const mu = m / (utm.R * utm.M1);

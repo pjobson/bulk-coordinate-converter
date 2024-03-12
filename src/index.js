@@ -11,9 +11,15 @@ const bcc = {
   },
   addEvents: () => {
     document.getElementById('dooeet').addEventListener('click', bcc.dooeet);
+    document.getElementById('reseet').addEventListener('click', bcc.reseet);
+  },
+  reseet: () => {
+    document.getElementById('input').value = '';
+    document.getElementById('results').style.display = 'none';
   },
   dooeet: () => {
     bcc.coordsIn = document.getElementById('input').value // textarea value
+                           .replace(/0(\d+°)/g,'$1')       // replace 0 padded degrees
                            .split(/[\r\n]/)               // split on carriage return
                            .map(coord => coord.trim())    // trim strings
                            .filter(Boolean)               // remove blanks

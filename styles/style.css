@@ -79,7 +79,7 @@ td {
 }
 
 td:nth-child(8), td:nth-child(9), td:nth-child(10), td:nth-child(11) {
-  text-align: right;
+  text-align: right !important;
 }
 
 tr.INVALID {

@@ -178,7 +178,7 @@ const utm = {
                     (a +
                      a3 / 6 * (1 - latTan2 + c) +
                      a5 / 120 * (5 - 18 * latTan2 + latTan4 + 72 * c - 58 * utm.E_P2)) + 500000;
-    const northing = utm.K0 *
+    let northing  = utm.K0 *
                      (m + n * latTan *
                      (a2 / 2 +
                       a4 / 24 * (5 - latTan2 + 9 * c + 4 * c * c) +

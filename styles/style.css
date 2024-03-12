@@ -68,11 +68,18 @@ th {
   padding-right: 10px;
 }
 
-tbody tr:nth-child(even) {background-color: #f2f2f2;}
+tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
 
 td {
   font-size: 0.75em;
   padding-right: 5px;
+  font-family: 'Source Code Pro', 'Courier New', monospace;
+}
+
+td:nth-child(8), td:nth-child(9), td:nth-child(10), td:nth-child(11) {
+  text-align: right;
 }
 
 tr.INVALID {
@@ -87,3 +94,4 @@ tr td:first-child {
   text-align: center;
   font-size: 0.75em;
 }
+
